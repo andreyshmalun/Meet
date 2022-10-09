@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/andreyshmalun/meet/static/css/main.073c9b0a.css",
+    "main.js": "/andreyshmalun/meet/static/js/main.82216d5c.js",
+    "static/js/787.4b564826.chunk.js": "/andreyshmalun/meet/static/js/787.4b564826.chunk.js",
+    "service-worker.js": "/andreyshmalun/meet/service-worker.js",
+    "static/media/logo.svg": "/andreyshmalun/meet/static/media/logo.103b5fa18196d5665a7e12318285c916.svg",
+    "index.html": "/andreyshmalun/meet/index.html",
+    "main.073c9b0a.css.map": "/andreyshmalun/meet/static/css/main.073c9b0a.css.map",
+    "main.82216d5c.js.map": "/andreyshmalun/meet/static/js/main.82216d5c.js.map",
+    "787.4b564826.chunk.js.map": "/andreyshmalun/meet/static/js/787.4b564826.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073c9b0a.css",
+    "static/js/main.82216d5c.js"
+  ]
+}
