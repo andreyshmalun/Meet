@@ -1,52 +1,52 @@
 import React, { Component } from 'react';
 
 class Event extends Component {
-    toggleEventDetails = () => {
-        this.setState({ show: !this.state.show });
+    state = {
+        detailsVisible: false,
     };
 
-    state = { show: false };
+    handleDetailsToggled = () => {
+        if (!this.state.detailsVisible) {
+            this.setState({
+                detailsVisible: true,
+            });
+        } else {
+            this.setState({
+                detailsVisible: false,
+            });
+        }
+    };
 
     render() {
         const { event } = this.props;
         return (
-            <>
-                <div className="event">
-                    <h1 className="event-summary-title">{event.summary}</h1>
-                    <p className="event-info">
-                        {event.start.dateTime} {event.start.timeZone} {event.location}
-                    </p>
-                    {this.state.show && (
-                        <>
-                            <h2 className="event-about-title">About event:</h2>
-                            <a
-                                href={event.htmlLink}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="event-htmlLink"
-                            >
+            <div className="event">
+                <h2 className="summary">{event.summary}</h2>
+                <p className="information">
+                    {event.start.dateTime} {event.start.timeZone} {event.location}
+                </p>
+                {this.state.detailsVisible ? (
+                    <>
+                        <div className="details">
+                            <h3 className="details-title">About event:</h3>
+                            <a href={event.htmlLink} className="details-link">
                                 See details on Google Calendar
                             </a>
-                            <p className="event-description">{event.description}</p>
-                        </>
-                    )}
-                    {!this.state.show ? (
+                            <p className="details-description">{event.description}</p>
+                        </div>
                         <button
-                            className="event-showDetails-btn"
-                            onClick={this.toggleEventDetails}
+                            className="hide-details"
+                            onClick={this.handleDetailsToggled}
                         >
-                            Show Details
+                            hide details
                         </button>
-                    ) : (
-                        <button
-                            className="event-hideDetails-btn"
-                            onClick={this.toggleEventDetails}
-                        >
-                            Hide Details
-                        </button>
-                    )}
-                </div>
-            </>
+                    </>
+                ) : (
+                    <button className="show-details" onClick={this.handleDetailsToggled}>
+                        show details
+                    </button>
+                )}
+            </div>
         );
     }
 }
