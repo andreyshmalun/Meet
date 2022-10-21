@@ -7,72 +7,55 @@ describe('<Event /> component', () => {
     let event, EventWrapper;
     beforeAll(() => {
         event = mockData[0];
-
-        EventWrapper = shallow(<Event event={event} />);
+        EventWrapper = shallow(<Event event={mockData[0]} />);
     });
 
-    test('render title in event item', () => {
-        expect(EventWrapper.find('.event-summary-title')).toHaveLength(1);
+    test('render summary of event', () => {
+        expect(EventWrapper.find('.summary')).toHaveLength(1);
     });
 
-    test('render info in event item', () => {
-        expect(EventWrapper.find('.event-info')).toHaveLength(1);
+    test('render summary of mock event correctly', () => {
+        expect(EventWrapper.find('.summary').text()).toBe(event.summary);
     });
 
-    test('render show details button in event item', () => {
-        expect(EventWrapper.find('.event-showDetails-btn')).toHaveLength(1);
+    test('render information of event', () => {
+        expect(EventWrapper.find('.information')).toHaveLength(1);
     });
 
-    test('render event title correctly', () => {
-        expect(EventWrapper.find('.event-summary-title').text()).toBe(
-            event.summary
+    test('render information of mock event correctly', () => {
+        expect(EventWrapper.find('.information').text()).toBe(
+            `${event.start.dateTime} ${event.start.timeZone} ${event.location}`
         );
     });
 
-    test('render event info correctly', () => {
-        expect(EventWrapper.find('.event-info').text()).toContain(
-            event.start.dateTime
-        );
-        expect(EventWrapper.find('.event-info').text()).toContain(
-            event.start.timeZone
-        );
-        expect(EventWrapper.find('.event-info').text()).toContain(event.location);
+    test('render button to show details', () => {
+        expect(EventWrapper.find('.show-details')).toHaveLength(1);
     });
 
-    test('render event collapsed by default', () => {
-        expect(EventWrapper.state('show')).toBe(false);
+    test('Do not render details by default', () => {
+        expect(EventWrapper.find('.details')).toHaveLength(0);
     });
 
-    test('render click to expand event details', () => {
-        EventWrapper.setState({
-            show: false
-        });
-        EventWrapper.find('.event-showDetails-btn').simulate('click');
-        expect(EventWrapper.state('show')).toBe(true);
+    test('Render details when show details button is clicked', () => {
+        EventWrapper.find('.show-details').at(0).simulate('click');
+        expect(EventWrapper.find('.details')).toHaveLength(1);
     });
 
-    test('render when event is collapsed after click expand event details', () => {
-        EventWrapper.setState({
-            show: true
-        });
-        expect(EventWrapper.find('.event-description').text()).toContain(
-            event.description
-        );
-        expect(EventWrapper.find('.event-hideDetails-btn')).toHaveLength(1);
+    test('render title, link, and description when details visible', () => {
+        EventWrapper.setState({ detailsVisible: true });
+        expect(EventWrapper.find('.details-title')).toHaveLength(1);
+        expect(EventWrapper.find('.details-link')).toHaveLength(1);
+        expect(EventWrapper.find('.details-description')).toHaveLength(1);
     });
 
-    test('render click to collapse event details', () => {
-        EventWrapper.setState({
-            show: true
-        });
-        EventWrapper.find('.event-hideDetails-btn').simulate('click');
-        expect(EventWrapper.state('show')).toBe(false);
+    test('render button to hide details when details visible', () => {
+        EventWrapper.setState({ detailsVisible: true });
+        expect(EventWrapper.find('.hide-details')).toHaveLength(1);
     });
 
-    test('render when event is expanded after click collapse event details', () => {
-        EventWrapper.setState({
-            show: false
-        });
-        expect(EventWrapper.find('.event-description')).toHaveLength(0);
+    test('Do not render details when hide details button is clicked', () => {
+        EventWrapper.setState({ detailsVisible: true });
+        EventWrapper.find('.hide-details').at(0).simulate('click');
+        expect(EventWrapper.find('.details')).toHaveLength(0);
     });
 });

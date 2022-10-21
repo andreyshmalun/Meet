@@ -1,5 +1,11 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:500);
 
+.navbar {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
 .App {
   text-align: center;
   color: #192742;
