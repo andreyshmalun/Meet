@@ -1,11 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:500);
 
-.navbar {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-}
-
 .App {
   text-align: center;
   color: #192742;
@@ -137,11 +131,6 @@ input[type='number'] {
   grid-gap: 20px;
   padding: 20px;
   font-family: sans-serif;
-}
-
-.Alert {
-  position: fixed;
-  top: 20px;
 }
 
 .data-vis-wrapper {
