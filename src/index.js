@@ -3,6 +3,8 @@ import './index.css';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
+import * as atatus from 'atatus-spa';
+atatus.config('1ba347b880ed494baf5dac2813ade01d').install();
 
 ReactDOM.render(<App />, document.getElementById("root"));
 
