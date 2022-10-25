@@ -3,6 +3,7 @@ import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents.js';
 import { extractLocations, getEvents } from './api';
+import { OfflineAlert } from './Alert';
 
 import './App.css';
 class App extends Component {
@@ -11,10 +12,18 @@ class App extends Component {
     locations: [],
     numberOfEvents: 32,
     selectedLocation: 'all',
+    offlineAlertText: ''
   };
 
   updateEvents = (location, eventCount) => {
     const { numberOfEvents } = this.state;
+
+    if (!navigator.onLine) {
+      this.setState({ offlineAlertText: 'You are currently offline. Events have been loaded from your last session' });
+    } else {
+      this.setState({ offlineAlertText: '' });
+    };
+
     if (location === undefined) location = this.state.selectedLocation;
     getEvents().then((events) => {
       const locationEvents =
@@ -49,6 +58,7 @@ class App extends Component {
       <div className="App">
         <h1>Meet App</h1>
         <h4>Choose your nearest city</h4>
+        <OfflineAlert text={this.state.offlineAlertText} />
         <div className='navbar'>
           <CitySearch
             locations={this.state.locations}
