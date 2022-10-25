@@ -45,7 +45,6 @@ input[type='number'] {
   flex-direction: column;
   flex-basis: 300px;
   max-width: 300px;
-  margin: auto;
   position: relative;
 }
 
@@ -116,8 +115,8 @@ input[type='number'] {
 }
 
 .number-of-events {
+  margin-top: 10px;
   width: 200px;
-  margin: 20px auto;
   text-align: center;
 }
 
