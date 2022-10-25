@@ -20,6 +20,7 @@ class NumberOfEvents extends Component {
                 numberOfEvents: value,
                 errorText: '',
             });
+            this.props.updateEvents(undefined, value);
         }
     };
 
