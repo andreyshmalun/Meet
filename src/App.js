@@ -47,6 +47,8 @@ class App extends Component {
     const { numberOfEvents } = this.state;
     return (
       <div className="App">
+        <h1>Meet App</h1>
+        <h4>Choose your nearest city</h4>
         <div className='navbar'>
           <CitySearch
             locations={this.state.locations}
