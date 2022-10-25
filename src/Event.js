@@ -23,7 +23,7 @@ class Event extends Component {
             <div className="event">
                 <h2 className="summary">{event.summary}</h2>
                 <p className="information">
-                    {event.start.dateTime} {event.start.time} {event.location}
+                    {event.start.dateTime} {event.start.timeZone} {event.location}
                 </p>
                 {this.state.detailsVisible ? (
                     <>
