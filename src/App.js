@@ -8,6 +8,7 @@ import WelcomeScreen from './WelcomeScreen';
 import {
   ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from 'recharts';
+import EventGenre from './EventGenre';
 
 import './App.css';
 class App extends Component {
@@ -75,14 +76,14 @@ class App extends Component {
   }
 
   render() {
-    const { numberOfEvents } = this.state;
+    const { numberOfEvents, events } = this.state;
     if (this.state.showWelcomeScreen === undefined) return <div
       className="App" />
 
     return (
       <div className="App">
         <h1>Meet App</h1>
-        <h4>Choose your nearest city</h4>
+        <h4 className='top-heading'>Choose your nearest city</h4>
         <OfflineAlert text={this.state.offlineAlertText} />
         <CitySearch
           locations={this.state.locations}
@@ -93,20 +94,23 @@ class App extends Component {
           updateEvents={this.updateEvents}
         />
         <h4>Events in each city</h4>
+        <div className="data-vis-wrapper">
+          <EventGenre events={events} />
+          <ResponsiveContainer height={400}>
+            <ScatterChart
+              margin={{
+                top: 20, right: 20, bottom: 20, left: -20,
+              }}
+            >
+              <CartesianGrid />
+              <XAxis type="category" dataKey="date" name="date" />
+              <YAxis type="number" dataKey="number" name="number of events" allowDecimals={false} />
+              <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+              <Scatter data={this.getData()} fill="#c19191" />
+            </ScatterChart>
+          </ResponsiveContainer>
+        </div>
 
-        <ResponsiveContainer height={400}>
-          <ScatterChart
-            margin={{
-              top: 20, right: 20, bottom: 20, left: -20,
-            }}
-          >
-            <CartesianGrid />
-            <XAxis type="category" dataKey="date" name="date" />
-            <YAxis type="number" dataKey="number" name="number of events" allowDecimals={false} />
-            <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-            <Scatter data={this.getData()} fill="#c19191" />
-          </ScatterChart>
-        </ResponsiveContainer>
 
         <div className='eventObject'>
           <EventList events={this.state.events} />
