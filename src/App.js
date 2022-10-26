@@ -5,6 +5,9 @@ import NumberOfEvents from './NumberOfEvents.js';
 import { OfflineAlert } from './Alert';
 import { getEvents, extractLocations, checkToken, getAccessToken } from './api';
 import WelcomeScreen from './WelcomeScreen';
+import {
+  ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
+} from 'recharts';
 
 import './App.css';
 class App extends Component {
@@ -15,6 +18,16 @@ class App extends Component {
     selectedLocation: 'all',
     offlineAlertText: '',
     showWelcomeScreen: undefined,
+  };
+
+  getData = () => {
+    const { locations, events } = this.state;
+    const data = locations.map((location) => {
+      const number = events.filter((event) => event.location === location).length
+      const city = location.split(', ').shift()
+      return { city, number };
+    })
+    return data;
   };
 
   updateEvents = (location, eventCount) => {
@@ -79,10 +92,26 @@ class App extends Component {
           numberOfEvents={numberOfEvents}
           updateEvents={this.updateEvents}
         />
+        <h4>Events in each city</h4>
+
+        <ResponsiveContainer height={400}>
+          <ScatterChart
+            margin={{
+              top: 20, right: 20, bottom: 20, left: -20,
+            }}
+          >
+            <CartesianGrid />
+            <XAxis type="category" dataKey="date" name="date" />
+            <YAxis type="number" dataKey="number" name="number of events" allowDecimals={false} />
+            <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+            <Scatter data={this.getData()} fill="#c19191" />
+          </ScatterChart>
+        </ResponsiveContainer>
 
         <div className='eventObject'>
           <EventList events={this.state.events} />
         </div>
+
         <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen}
           getAccessToken={() => { getAccessToken() }} />
       </div>
