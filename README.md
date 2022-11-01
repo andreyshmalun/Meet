@@ -2,7 +2,7 @@
 
 Connect with likeminded people in your city by finding events you are interested in.
 
-#Live demo
+# Live demo
 https://andreyshmalun.github.io/meet/
 
 ## Objectives
