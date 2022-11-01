@@ -2,6 +2,9 @@
 
 Connect with likeminded people in your city by finding events you are interested in.
 
+# Live demo
+https://andreyshmalun.github.io/meet/
+
 ## Objectives
 
 - Build a serverless React PWA (for online and offline use).
